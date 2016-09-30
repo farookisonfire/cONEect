@@ -1,12 +1,14 @@
 const { createStore } = require('redux')
 
-const reducer= (state={count:0},action) => {
+const defaultStore = {
+  count: 0,
+  programs: ['CAPE TOWN 1', 'CAPE TOWN 2', 'CAPE TOWN 3']
+}
+
+const reducer= (state=defaultStore,action) => {
   let count = state.count || 0
   switch(action.type) {
-    case 'INC': return Object.assign({},state,{count:count+1})
-    case 'DEC': return Object.assign({},state,{count:count-1})
     case 'FETCH_USER_FULFILLED': return Object.assign({}, state, {name:action.payload.name})
-    case 'FETCH_PROGRAMS': return Object.assign({}, state,{ dates: action.payload.programs})
     default: return state
   }
 }

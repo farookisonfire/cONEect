@@ -1,18 +1,20 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { fetchUser } = require('./actions')
-const { fetchPrograms } = require('./actions')
+const { fetchPrograms } = require('./program-actions')
 
 
-const Counter = ({ counter,user,programs,dispatch  }) => {
+const ToDos = ({ counter,user,programs,dispatch  }) => {
   dispatch(fetchUser());
-  // dispatch(fetchPrograms());
   console.log(programs)
+  const programList = programs.map((program, id)=><li key={id}>{program}</li>)
+
   return (
     <div>
       <h2>Welcome, {user}!</h2>
       <h4>Your Action Items</h4>
-      <button id="select-program" onClick={()=>fetchPrograms()}>Select Program</button>
+      <button id="select-program">Select Program</button>
+      <ul>{ programList }</ul>
     </div>
   )
 }
@@ -22,8 +24,8 @@ const mapStateToProps = (state) => {
   return {
     counter: state.count,
     user: state.name,
-    programs: state.dates
+    programs: state.programs
   }
 }
 
-module.exports = connect(mapStateToProps)(Counter)
+module.exports = connect(mapStateToProps)(ToDos)
