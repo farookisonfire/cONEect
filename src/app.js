@@ -1,20 +1,28 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const { fetchUser } = require('./actions')
-const { fetchPrograms } = require('./program-actions')
+const { fetchProgramTypes,fetchUser } = require('./actions')
 
 
 const ToDos = ({ counter,user,programs,dispatch  }) => {
   dispatch(fetchUser());
-  console.log(programs)
-  const programList = programs.map((program, id)=><li key={id}>{program}</li>)
-
+  // console.log(programs)
+  const programTypes = programs.types.map(type=>type.type)
+  if (programs.programVisible === true) {
+    var test = <div>Visibility is T</div>
+    console.log('TRUE')
+    console.log(test)
+  } else {
+    var test = null
+    console.log('FALSE')
+    console.log(test)
+  }
+  console.log(programTypes)
   return (
     <div>
       <h2>Welcome, {user}!</h2>
       <h4>Your Action Items</h4>
-      <button id="select-program">Select Program</button>
-      <ul>{ programList }</ul>
+      <button id="select-program" onClick={()=>dispatch(fetchProgramTypes())}>Select Program</button>
+      {test}
     </div>
   )
 }
