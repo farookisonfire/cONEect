@@ -1,20 +1,19 @@
 const { createStore } = require('redux')
 
 const defaultStore = {
-  count: 0,
   programs: {
-    programsVisibile: false,
+    programsVisible: false,
     types: [
       {
-        typeVisibile:false,
+        typeVisible:false,
         type: 'Youth Empowerment',
         categories: [
           {
-            categoryVisibile: false,
+            categoryVisible: false,
             category:'Global Intership',
             locations: [
               {
-                locationVisibile: false,
+                locationVisible: false,
                 location: 'South Africa',
                 dates: [
                   'May 22 - June 16',
@@ -40,18 +39,15 @@ const defaultStore = {
 } // end of defaultStore
 
 const reducer= (state=defaultStore,action) => {
+  const count = state.count || 0;
   switch(action.type) {
-    case 'FETCH_USER_FULFILLED': return Object.assign({}, state, {name:action.payload.name})
-    case 'FETCH_PROGRAM_TYPES':{
-      let test = Object.assign({},state.programs,{programsVisibile:true})
-      return Object.assign({},state,{programs:test})
-  }
-
-
+    case 'FETCH_USER_FULFILLED': return Object.assign({}, state, {name:action.payload.name, count:count+1})
+    case 'FETCH_PROGRAMS': return Object.assign({},state,{programs:action.payload,count:count+1})
+    case 'FETCH_PROGRAM_TYPES': return Object.assign({},state,{programs:action.payload,count:count+1})
     default: return state
   }
 }
 
-const store = createStore(reducer);
+const store = createStore(reducer,window.devToolsExtension && window.devToolsExtension());
 
 module.exports = store

@@ -1,29 +1,36 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const { fetchProgramTypes,fetchUser } = require('./actions')
+const { fetchProgramTypes,fetchPrograms,fetchUser } = require('./actions')
+
 
 
 const ToDos = ({ counter,user,programs,dispatch  }) => {
-  dispatch(fetchUser());
-  // console.log(programs)
+
+  console.log('gate 1' + programs)
   const programTypes = programs.types.map(type=>type.type)
-  if (programs.programVisible === true) {
-    var test = <div>Visibility is T</div>
-    console.log('TRUE')
-    console.log(test)
-  } else {
-    var test = null
-    console.log('FALSE')
-    console.log(test)
-  }
-  console.log(programTypes)
+  console.log(programs.types[0].typeVisible)
+  var theTypes = null;
+  programs.types.forEach(type => {
+  var thePrograms = 'hey';
+    if (type.typeVisible === true) {
+      console.log('TRUE')
+      var theTypes = 'hello'
+    } else {
+      console.log('FALSE')
+      var theTypes = null
+    }
+  })
+
+  console.log('test' + programTypes)
   return (
     <div>
+      {console.log('these are the types: '+theTypes)}
       <h2>Welcome, {user}!</h2>
       <h4>Your Action Items</h4>
-      <button id="select-program" onClick={()=>dispatch(fetchProgramTypes())}>Select Program</button>
-      {test}
+      <button id="select-program" onClick={()=>dispatch(fetchProgramTypes(programs))}>Select Program</button>
+      <div>{theTypes}</div>
     </div>
+
   )
 }
 

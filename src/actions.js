@@ -1,7 +1,9 @@
 module.exports = {
-  fetchProgramTypes() {
+  fetchPrograms(programs) {
+  programs.programsVisible = true;
     return{
-      type: 'FETCH_PROGRAM_TYPES'
+      type: 'FETCH_PROGRAMS',
+      payload: programs
     }
   },
   fetchUser() {
@@ -11,6 +13,13 @@ module.exports = {
         name: 'Kafka Tamura',
         age: 29,
       }
+    }
+  },
+  fetchProgramTypes(programs){
+    programs.types.forEach((type)=>type.typeVisible = true)
+    return{
+      type: 'FETCH_PROGRAM_TYPES',
+      payload: programs
     }
   }
 }
