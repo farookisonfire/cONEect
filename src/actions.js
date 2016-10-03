@@ -21,5 +21,16 @@ module.exports = {
       type: 'FETCH_PROGRAM_TYPES',
       payload: programs
     }
+  },
+  fetchYouthEmpowerment(programs){
+    programs.types.forEach((type)=>{
+      if(type.type === 'Youth Empowerment'){
+        type.categories.forEach((category)=>category.categoryVisible = true)
+      }
+    })
+    return{
+      type: 'FETCH_YOUTH_EMPOWERMENT',
+      payload: programs
+    }
   }
 }
