@@ -1,17 +1,16 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { fetchYouthEmpowerment,fetchProgramTypes,fetchPrograms,fetchUser } = require('./actions')
+const WelcomeText = require('./welcome')
 
 
 
 const ToDos = ({ counter,user,programs,dispatch  }) => {
 
-  console.log('gate 1.0' + programs)
   const programTypes = programs.types.map((type)=>{
     return{type: type.type, typeVisible: type.typeVisible}
   })
   console.log(programTypes)
-  console.log(programs.types[0].typeVisible)
   var theTypes = [];
   programTypes.forEach(type => {
     if (type.typeVisible === true) {
@@ -28,7 +27,6 @@ const ToDos = ({ counter,user,programs,dispatch  }) => {
       return {categoryName: category.category, categoryVisible: category.categoryVisible}
     })
   })
-  console.log('The categories: ')
   console.log(programCategories)
   var theCategories = [];
   programCategories.forEach((type)=>{
@@ -40,25 +38,22 @@ const ToDos = ({ counter,user,programs,dispatch  }) => {
       }
     })
   })
-
-  console.log('visible categories: ')
   console.log(theCategories)
-
 
   return (
     <div>
-      {console.log('these are the types: '+theTypes)}
-      <h2>Welcome, {user}!</h2>
+      <WelcomeText user={'Kafka'}/>
       <h4>Your Action Items</h4>
-      <button id="select-program" onClick={()=>dispatch(fetchProgramTypes(programs))}>Select Program</button>
+      <ul className = 'list-group'>
+        <li className = 'list-group-item' id="select-program" onClick={()=>dispatch(fetchProgramTypes(programs))}>Select Program</li>
+      </ul>
       <div>
-        {theTypes.map((type,key)=><button key={key} onClick={()=>dispatch(fetchYouthEmpowerment(programs))}>{type}</button>)}
+        {theTypes.map((type,key)=><li className='list-group-item' key={key} onClick={()=>dispatch(fetchYouthEmpowerment(programs))}>{type}</li>)}
       </div>
       <div>
-        {theCategories.map((category, key)=><button key={key}>{category}</button>)}
+        {theCategories.map((category, key)=><li className='list-group-item' key={key}>{category}</li>)}
       </div>
     </div>
-
   )
 }
 
