@@ -1,12 +1,17 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const ToDos = require('./app')
 const { Provider } = require('react-redux')
-const store = require('./store')
+const store = require('./_store')
+const Welcome = require('./components/welcome')
+const ActionItems = require('./components/action-items')
+
 
 ReactDOM.render(
   <Provider store={ store }>
-    <ToDos/>
+    <div>
+      <Welcome/>
+      <ActionItems/>
+    </div>
   </Provider>,
   document.getElementById('app')
 )
