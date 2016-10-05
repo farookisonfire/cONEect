@@ -1,23 +1,31 @@
+const React = require('react')
 const { connect } = require('react-redux')
+const { selectType } = require('../_actions')
 
-
-const ProgramTypes = ({ programTypes }) => {
+const ProgramTypes = ({ selectedProgramTypeId ,programTypes, dispatch }) => {
   return(
     <ul className='list-group'>
       {programTypes.map((type, key)=>
-        <li className='list-group-item' key={key}>{type.name}</li>)}
+        <li
+          className = {selectedProgramTypeId === type.id ? 'list-group-item active' : 'list-group-item'}
+          key={key}
+          onClick= { () => dispatch(selectType(type.id)) }
+        >
+          {type.name}
+        </li>)}
     </ul>
   )
 }
 
-const mapStateToProps = ({ selectedCategoryId, entities: { programs, programTypes } }) => {
+const mapStateToProps = ({ selectedProgramTypeId ,selectedCategoryId, entities: { programs, programTypes } }) => {
 
   const programsByCategoryId = Object
     .keys(programs)
     .map(programId => programs[programId])
     .filter(program => program.programCategoryId === selectedCategoryId)
 
-  const programsTypesByCategoryId = Object
+
+  const programTypesByCategoryId = Object
     .keys(programTypes)
     .map(programTypeId => programTypes[programTypeId])
     .filter(programType => {
@@ -27,7 +35,8 @@ const mapStateToProps = ({ selectedCategoryId, entities: { programs, programType
     })
 
   return {
-    programTypes: programsTypesByCategoryId
+    selectedProgramTypeId,
+    programTypes: programTypesByCategoryId
   }
 }
 

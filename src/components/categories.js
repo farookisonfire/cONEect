@@ -1,17 +1,26 @@
 const React = require('react')
 const { connect } = require('react-redux')
+const { selectCategory } = require('../_actions')
 
-const Categories = ({ programCategories }) => {
+const Categories = ({ selectedCategoryId,programCategories, dispatch }) => {
   return(
     <ul className='list-group'>
       { programCategories.map((category,key) =>
-        <li className='list-group-item' key={key}>{ category.name }</li>) }
+        <li
+          className={selectedCategoryId === category.id ? 'list-group-item active' : 'list-group-item'}
+          key= { key }
+          onClick = {() => dispatch(selectCategory(category.id))}
+        >
+            { category.name }
+        </li>)
+      }
     </ul>
   )
 }
 
-const mapStateToProps = ({ entities: { programCategories } }) => {
+const mapStateToProps = ({ selectedCategoryId, entities: { programCategories } }) => {
   return {
+    selectedCategoryId,
     programCategories: Object
       .keys(programCategories)
       .map((key) => programCategories[key])

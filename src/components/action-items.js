@@ -1,11 +1,13 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const Categories = require('./categories')
+const ProgramTypes = require('./types')
+const Programs = require('./programs')
 const { displayCategories } = require('../_actions')
 
 
 
-const ActionItems = ({ displayingCategories, dispatch }) => {
+const ActionItems = ({ displayingCategories, selectedCategoryId, selectedProgramTypeId, dispatch }) => {
   return(
     <div>
       <h3>Your Action Items</h3>
@@ -16,14 +18,19 @@ const ActionItems = ({ displayingCategories, dispatch }) => {
           Select Program
         </li>
       </ul>
+      {console.log(selectedProgramTypeId)}
       { displayingCategories ? <Categories/> : <div></div> }
+      { selectedCategoryId > 0 ? <ProgramTypes/> : <div></div> }
+      { selectedProgramTypeId > 0 ? <Programs/> : <div></div> }
     </div>
   )
 }
 
-const mapStateToProps = ({ displayingCategories }) => {
+const mapStateToProps = ({ displayingCategories, selectedCategoryId, selectedProgramTypeId }) => {
   return {
-    displayingCategories
+    displayingCategories,
+    selectedCategoryId,
+    selectedProgramTypeId
   }
 }
 
