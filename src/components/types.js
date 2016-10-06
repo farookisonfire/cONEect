@@ -4,16 +4,17 @@ const { selectType } = require('../_actions')
 
 const ProgramTypes = ({ selectedProgramTypeId ,programTypes, dispatch }) => {
   return(
-    <ul className='list-group'>
+    <div className='list-group'>
       {programTypes.map((type, key)=>
-        <li
+        <a
+          href= '#'
           className = {selectedProgramTypeId === type.id ? 'list-group-item active' : 'list-group-item'}
           key={key}
           onClick= { () => dispatch(selectType(type.id)) }
         >
           {type.name}
-        </li>)}
-    </ul>
+        </a>)}
+    </div>
   )
 }
 

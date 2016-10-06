@@ -1,7 +1,12 @@
 const initialState = {
-  selectedProgramTypeId: 0,
-  selectedCategoryId: 0,
+
+  showModal: false,
+
   displayingCategories: false,
+  selectedCategoryId: 0,
+  selectedProgramTypeId: 0,
+  selectedProgramId: 0,
+  selectedDateId: 0,
   entities: {
     programCategories: {
       '1': {

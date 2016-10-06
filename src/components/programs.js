@@ -1,34 +1,38 @@
 const React = require('react')
 const { connect } = require('react-redux')
+const { selectProgram } = require('../_actions')
 
-const Programs = ({ programs }) => {
+const Programs = ({ programs, selectedProgramId, selectedDateId, dispatch }) => {
   console.log(programs)
   return(
-    <ul className= 'list-group'>
+    <div className= 'list-group'>
       {programs.map((program, key) => {
         return (
           <div key = {key}>
             <li
               className='list-group-item active'
-
             >
-              {program.location}
+              { program.location }
             </li>
-            {program.dates.map((date,key) =>
-              <li
-                key = {key}
-                className = 'list-group-item'
-              >{date}</li>)}
+            { program.dates.map((date,index) =>
+              <a
+                href='#'
+                key = {index}
+                className = { selectedProgramId === program.id && selectedDateId === index ? 'list-group-item-success list-group-item' : 'list-group-item'}
+                onClick = { () => dispatch(selectProgram(program.id, index)) }
+              >
+              {date}
+              </a>) }
           </div>
         )
       }
     )}
-    </ul>
+    </div>
   )
 }
 
 
-const mapStateToProps = ({ selectedCategoryId, selectedProgramTypeId, entities: { programs } }) => {
+const mapStateToProps = ({ selectedCategoryId, selectedProgramTypeId, selectedProgramId, selectedDateId, entities: { programs } }) => {
   const programsByCategoryAndType = Object
     .keys(programs)
     .map(key => programs[key])
@@ -36,7 +40,9 @@ const mapStateToProps = ({ selectedCategoryId, selectedProgramTypeId, entities: 
     )
 
     return {
-      programs: programsByCategoryAndType
+      programs: programsByCategoryAndType,
+      selectedProgramId,
+      selectedDateId
     }
   }
 

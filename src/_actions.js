@@ -16,3 +16,12 @@ exports.selectType = (id) => {
   } else if (id === 2) {
     return{ type: 'SELECTED_VOLUNTEER' }}
 }
+
+exports.selectProgram = (programId, dateId) => {
+  return { type: 'PROGRAM_SELECTED', programId, dateId }
+}
+
+
+exports.showTheModal = (visibility) => {
+  return {type:'SHOW_MODAL', visibility}
+}

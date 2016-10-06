@@ -4,17 +4,18 @@ const { selectCategory } = require('../_actions')
 
 const Categories = ({ selectedCategoryId,programCategories, dispatch }) => {
   return(
-    <ul className='list-group'>
+    <div className='list-group'>
       { programCategories.map((category,key) =>
-        <li
+        <a
+          href='#'
           className={selectedCategoryId === category.id ? 'list-group-item active' : 'list-group-item'}
           key= { key }
           onClick = {() => dispatch(selectCategory(category.id))}
         >
             { category.name }
-        </li>)
+        </a>)
       }
-    </ul>
+    </div>
   )
 }
 
