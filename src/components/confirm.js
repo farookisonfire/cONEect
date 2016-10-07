@@ -1,8 +1,13 @@
 const React = require('react')
 const Modal = require('react-bootstrap/lib/Modal')
 const Button = require('react-bootstrap/lib/Button')
-const { showTheModal } = require('../_actions')
 const { connect } = require('react-redux')
+const { showTheModal } = require('../_actions')
+const { confirmProgram} = require('../_actions')
+const { batchActions } = require('redux-batched-actions')
+
+console.log(showTheModal)
+console.log(confirmProgram)
 
 const Confirm = ({ selectedProgramCategoryName, selectedProgramTypeName, selectedProgramDates, showModal, dispatch }) => {
   return(
@@ -34,7 +39,7 @@ const Confirm = ({ selectedProgramCategoryName, selectedProgramTypeName, selecte
           <Button bsStyle='warning' onClick={() => dispatch(showTheModal(false))}>Cancel</Button>
           <Button
             bsStyle ='success'
-            onClick={() => dispatch(showTheModal(false))}>Confirm</Button>
+            onClick={() => dispatch(batchActions([showTheModal(false), confirmProgram()]))}>Confirm</Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -6,28 +6,59 @@ const displayingCategories = (state = false, { type }) => {
   switch(type) {
     case 'DISPLAY_CATEGORIES':
       return true
+    case 'PROGRAM_CONFIRMED':
+      return false
     default:
       return state
   }
 }
 
-const selectedCategoryId = (state=0, { type }) => {
-  switch(type) {
-    case 'SELECTED_YOUTH_EMPOWERMENT':
-      return 1
-    case 'SELECTED_HEALTH_INNOVATION':
-      return 2
+const displayingTypes = (state=false,{type}) => {
+  switch(type){
+    case 'SELECTED_CATEGORY':
+      return true
+    case 'PROGRAM_CONFIRMED':
+      return false
     default:
       return state
   }
 }
 
-const selectedProgramTypeId = (state=0, { type }) => {
+const displayingPrograms = (state = false, { type }) => {
   switch(type) {
-    case 'SELECTED_INTERNSHIP':
-      return 1
-    case 'SELECTED_VOLUNTEER':
-      return 2
+    case 'SELECTED_TYPE':
+      return true
+    case 'PROGRAM_CONFIRMED':
+      return false
+    default:
+      return state
+  }
+}
+
+const displayingConfirmButton = (state = false, { type }) => {
+  switch(type){
+    case 'PROGRAM_SELECTED':
+      return true
+    case 'PROGRAM_CONFIRMED':
+      return false
+    default:
+      return state
+  }
+}
+
+const selectedCategoryId = (state=0, { type, payload }) => {
+  switch(type) {
+    case 'SELECTED_CATEGORY':
+      return payload
+    default:
+      return state
+  }
+}
+
+const selectedProgramTypeId = (state=0, { type, payload }) => {
+  switch(type) {
+    case 'SELECTED_TYPE':
+      return payload
     default:
       return state
   }
@@ -60,6 +91,15 @@ const showModal = (state=false, { type, visibility }) => {
   }
 }
 
+const programConfirmed = (state=false, {type}) => {
+  switch(type) {
+    case 'PROGRAM_CONFIRMED':
+      return true
+    default:
+      return state
+  }
+}
+
 const programCategories = (state = {}) => {
   return state
 }
@@ -73,12 +113,17 @@ const programs = (state = {}) => {
 }
 
 const rootReducer = combineReducers({
-  showModal,
+
   displayingCategories,
+  displayingTypes,
+  displayingPrograms,
+  displayingConfirmButton,
   selectedCategoryId,
   selectedProgramTypeId,
   selectedProgramId,
   selectedDateId,
+  showModal,
+  programConfirmed,
   entities: combineReducers({
     programCategories,
     programTypes,

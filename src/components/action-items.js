@@ -8,7 +8,7 @@ const { displayCategories } = require('../_actions')
 
 
 
-const ActionItems = ({ displayingCategories, selectedCategoryId, selectedProgramTypeId, selectedProgramId, dispatch }) => {
+const ActionItems = ({ displayingCategories, displayingTypes, displayingPrograms, displayingConfirmButton, selectedCategoryId, selectedProgramTypeId, selectedProgramId, programConfirmed, dispatch }) => {
   return(
     <div>
       <h3>Your Action Items</h3>
@@ -16,26 +16,38 @@ const ActionItems = ({ displayingCategories, selectedCategoryId, selectedProgram
         <a
           href= '#'
           className='list-group-item'
+          style={ programConfirmed ? {color:'white' ,backgroundColor:'green', boxShadow: '10px 10px 5px #888888'}: null}
           onClick={ () => dispatch(displayCategories()) }>
+          { programConfirmed &&
+            <i
+              className="fa fa-check-square fa-lg"
+              aria-hidden="true"
+              style={{paddingRight: '10%'}}
+            >
+            </i>}
           Select Program
         </a>
       </div>
       {console.log(selectedProgramTypeId)}
       { displayingCategories ? <Categories/> : <div></div> }
-      { selectedCategoryId > 0 ? <ProgramTypes/> : <div></div> }
-      { selectedProgramTypeId > 0 ? <Programs/> : <div></div> }
-      { selectedProgramId > 0 ? <Confirm/> : <div></div> }
+      { selectedCategoryId > 0 && displayingTypes ? <ProgramTypes/> : <div></div> }
+      { selectedProgramTypeId > 0 && displayingPrograms ? <Programs/> : <div></div> }
+      { selectedProgramId > 0 && displayingConfirmButton ? <Confirm/> : <div></div> }
 
     </div>
   )
 }
 
-const mapStateToProps = ({ displayingCategories, selectedCategoryId, selectedProgramTypeId, selectedProgramId }) => {
+const mapStateToProps = ({ displayingCategories, displayingTypes, displayingPrograms, displayingConfirmButton, selectedCategoryId, selectedProgramTypeId, selectedProgramId, programConfirmed }) => {
   return {
     displayingCategories,
+    displayingTypes,
+    displayingPrograms,
+    displayingConfirmButton,
     selectedCategoryId,
     selectedProgramTypeId,
-    selectedProgramId
+    selectedProgramId,
+    programConfirmed
   }
 }
 

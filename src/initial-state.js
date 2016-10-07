@@ -1,12 +1,14 @@
 const initialState = {
-
-  showModal: false,
-
   displayingCategories: false,
+  displayingTypes:false,
+  displayingPrograms: false,
+  displayingConfirmButton: false,
   selectedCategoryId: 0,
   selectedProgramTypeId: 0,
   selectedProgramId: 0,
   selectedDateId: 0,
+  showModal: false,
+  programConfirmed: false,
   entities: {
     programCategories: {
       '1': {
