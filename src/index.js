@@ -4,14 +4,20 @@ const { Provider } = require('react-redux')
 const store = require('./_store')
 const Welcome = require('./components/welcome')
 const ActionItems = require('./components/action-items')
-
+const { Grid, Row, Col } = require('react-bootstrap')
 
 ReactDOM.render(
   <Provider store={ store }>
-    <div>
-      <Welcome/>
-      <ActionItems/>
-    </div>
+    <Grid>
+      <Row className="show-grid">
+        <Col xs={6} xsOffset={3}>
+          <div>
+            <Welcome/>
+            <ActionItems/>
+          </div>
+        </Col>
+      </Row>
+    </Grid>
   </Provider>,
   document.getElementById('app')
 )

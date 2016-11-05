@@ -6,7 +6,7 @@ const Programs = require('./programs')
 const Confirm = require('./confirm')
 const { displayCategories } = require('../_actions')
 
-const Fundraising = require('./fundraising')
+
 
 const ActionItems = ({ displayingCategories, displayingTypes, displayingPrograms, displayingConfirmButton, selectedCategoryId, selectedProgramTypeId, selectedProgramId, programConfirmed, dispatch }) => {
   return(
@@ -28,7 +28,6 @@ const ActionItems = ({ displayingCategories, displayingTypes, displayingPrograms
           Select Program
         </a>
       </div>
-      <Fundraising/>
       {console.log(selectedProgramTypeId)}
       { displayingCategories ? <Categories/> : <div></div> }
       { selectedCategoryId > 0 && displayingTypes ? <ProgramTypes/> : <div></div> }
